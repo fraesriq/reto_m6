@@ -1,0 +1,32 @@
+
+<div class="container mt-4 text-right">
+  <button id="newCardButton" class="btn btn-primary bt-sm">Agregar Nuevo Carton</button>
+</div>
+
+<div class="container mt-4">
+  <div class="row">    
+    {{#each cards}}
+    {{> card}}
+    {{/each}}
+  </div>
+</div>
+
+<script>
+  const newCardButton = document.getElementById('newCardButton');
+  newCardButton.addEventListener('click', () => {
+    console.log('click')
+    fetch('/new_card',{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: "follow"
+    }).then(response => response.json())
+    .then(data=>{
+      alert('Carton Generado con Exito!')
+      location.href = '/cards'
+    })
+
+  });
+</script>
+    
